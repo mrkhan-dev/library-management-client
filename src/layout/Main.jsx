@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 const Main = () => {
   return (
     <div>
-      <div className="h-20">
+      <div className="h-24">
         <Nav />
       </div>
       <Outlet />
