@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 import UseAuth from "../hooks/UseAuth";
 import toast from "react-hot-toast";
+import {LuUserCircle} from "react-icons/lu";
 
 const Nav = () => {
   const [theme, setTheme] = useState("light");
@@ -103,6 +104,7 @@ const Nav = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div className="navbar-end gap-4">
+        {user?.displayName}
         {user ? (
           <div className="dropdown dropdown-end">
             <div
@@ -111,10 +113,14 @@ const Nav = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                {user.photoURL ? (
+                  <img
+                    className="h-12 w-12 rounded-full flex justify-center items-center"
+                    src={user.photoURL}
+                  />
+                ) : (
+                  <LuUserCircle className="h-full w-full" />
+                )}
               </div>
             </div>
             <ul
@@ -125,7 +131,12 @@ const Nav = () => {
                 <p>{user.displayName}</p>
               </li>
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <button
+                  onClick={handleLogout}
+                  className="btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

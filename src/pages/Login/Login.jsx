@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import toast from "react-hot-toast";
 import UseAuth from "../../hooks/UseAuth";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 const Login = () => {
   const {login, user, googleLogin} = UseAuth();
@@ -141,6 +141,12 @@ const Login = () => {
               Sign in with Google
             </span>
           </div>
+          <p className="text-lg text-right mt-4 gap-2">
+            New to this website?
+            <Link to="/register" className="text-emerald-500">
+              Sign Up
+            </Link>{" "}
+          </p>
         </div>
       </div>
     </div>
