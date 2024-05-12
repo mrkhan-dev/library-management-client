@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 
 const AddBook = () => {
@@ -15,7 +16,24 @@ const AddBook = () => {
     const email = user.email;
 
     const formData = {name, category, image, quantity, rating, author, email};
-    console.log(formData);
+
+    fetch("http://localhost:5000/addBooks", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+          });
+        }
+      });
   };
 
   return (
@@ -47,8 +65,13 @@ const AddBook = () => {
               <option disabled selected>
                 Books Category
               </option>
-              <option>Han Solo</option>
-              <option>Greedo</option>
+              <option>Novel</option>
+              <option>History</option>
+              <option>Drama</option>
+              <option>Programming</option>
+              <option>Politics</option>
+              <option>Thriller</option>
+              <option>Philosophy</option>
             </select>
           </div>
         </div>
