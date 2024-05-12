@@ -1,9 +1,18 @@
 import {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import UseAuth from "../../hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [regError, setRegError] = useState();
+
+  const {createUer, updateUserProfile, user} = UseAuth();
+  console.log(user);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -25,12 +34,21 @@ const Register = () => {
       return;
     }
     setRegError("");
-    console.log(data);
+    // create user
+    createUer(email, password)
+      .then(() => {
+        updateUserProfile(name, photo);
+        toast.success("Sign Up successful");
+        navigate(location.state || "/");
+      })
+      .catch(() => {
+        toast.error("This email already in use");
+      });
   };
 
   return (
-    <div className="flex justify-center items-center max-w-7xl mx-auto ">
-      <div className="flex w-full max-w-sm mx-auto overflow-hidden   rounded-lg shadow-lg  lg:max-w-7xl lg:h-[720px]">
+    <div className="flex justify-center items-center max-w-7xl mx-auto">
+      <div className="flex w-full max-w-sm mx-auto overflow-hidden border rounded-lg shadow-lg  lg:max-w-7xl lg:h-[720px]">
         <div
           className="hidden bg-cover bg-center lg:block lg:w-1/2"
           style={{

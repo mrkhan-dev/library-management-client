@@ -1,8 +1,33 @@
 import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
+import UseAuth from "../hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const Nav = () => {
   const [theme, setTheme] = useState("light");
+
+  const {user, logOut} = UseAuth();
+
+  const handleTheme = (e) => {
+    if (e.target.checked) {
+      setTheme("sunset");
+    } else {
+      setTheme("light");
+    }
+  };
+
+  const handleLogout = () => {
+    logOut().then(() => {
+      toast.success("Log Out Successful");
+    });
+  };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
   const navLink = (
     <>
       <li>
@@ -43,21 +68,6 @@ const Nav = () => {
       </li>
     </>
   );
-
-  const handleTheme = (e) => {
-    if (e.target.checked) {
-      setTheme("sunset");
-    } else {
-      setTheme("light");
-    }
-  };
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
-
   return (
     <div className="navbar bg-base-100 shadow-xl fixed z-10 lg:px-52">
       <div className="navbar-start">
@@ -93,42 +103,39 @@ const Nav = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div className="navbar-end gap-4">
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                />
+              </div>
             </div>
+            <ul
+              tabIndex={0}
+              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <p>{user.displayName}</p>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
-        <Link to="login">
-          <button className="btn text-lg font-semibold px-5 bg-cyan-500 text-white font-Poppins hover:bg-emerald-500">
-            Login
-          </button>
-        </Link>
+        ) : (
+          <Link to="login">
+            <button className="btn text-lg font-semibold px-5 bg-cyan-500 text-white font-Poppins hover:bg-emerald-500">
+              Login
+            </button>
+          </Link>
+        )}
         {/* theme */}
         <label className="swap swap-rotate">
           {/* this hidden checkbox controls the state */}

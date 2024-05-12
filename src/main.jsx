@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import {Toaster} from "react-hot-toast";
 
 import {RouterProvider} from "react-router-dom";
 import router from "./routes/Router";
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <HelmetProvider>
       <AuthProvider>
         <RouterProvider router={router} />
+        <Toaster position="bottom-left" reverseOrder={false} />
       </AuthProvider>
     </HelmetProvider>
   </React.StrictMode>
