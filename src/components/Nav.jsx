@@ -50,7 +50,7 @@ const Nav = () => {
               ? "text-lg font-semibold px-5 py-3  text-emerald-500 border border-emerald-500"
               : "text-lg font-semibold "
           }
-          to="addBook"
+          to="addBooks"
         >
           Add Book
         </NavLink>

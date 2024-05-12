@@ -12,10 +12,22 @@ const AddBook = () => {
     const image = form.image.value;
     const quantity = form.quantity.value;
     const rating = form.rating.value;
+    const description = form.description.value;
     const author = user.displayName;
     const email = user.email;
+    const photo = user.photoURL;
 
-    const formData = {name, category, image, quantity, rating, author, email};
+    const formData = {
+      name,
+      category,
+      image,
+      description,
+      quantity,
+      rating,
+      author,
+      photo,
+      email,
+    };
 
     fetch("http://localhost:5000/addBooks", {
       method: "POST",
@@ -29,7 +41,7 @@ const AddBook = () => {
         if (data.insertedId) {
           Swal.fire({
             title: "Good job!",
-            text: "You clicked the button!",
+            text: "Book added successful",
             icon: "success",
           });
         }
