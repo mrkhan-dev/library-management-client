@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const GridBooks = ({books}) => {
   const {name, category, image, description, author} = books;
@@ -16,9 +17,11 @@ const GridBooks = ({books}) => {
         </div>
         <p>{description}</p>
         <div className="card-actions flex justify-between items-center">
-          <button className="btn bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-Poppins ">
-            Update
-          </button>
+          <Link to={`/updateBook/${books._id}`}>
+            <button className="btn bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-Poppins ">
+              Update
+            </button>
+          </Link>
           <p className="ml-12 font-Poppins">{author}</p>
           <div
             tabIndex={0}
