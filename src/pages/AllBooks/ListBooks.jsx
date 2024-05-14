@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 const ListBooks = () => {
   const [tableBook, setTableBook] = useState([]);
-  console.log(tableBook);
 
   useEffect(() => {
     fetch("http://localhost:5000/allBooks")
@@ -49,9 +49,11 @@ const ListBooks = () => {
               </td>
               <td>{book.category}</td>
               <th>
-                <button className="btn bg-gradient-to-r from-emerald-500 to-cyan-500 text-white btn-xs">
-                  Update
-                </button>
+                <Link to={`/updateBook/${book._id}`}>
+                  <button className="btn bg-gradient-to-r from-emerald-500 to-cyan-500 text-white btn-xs">
+                    Update
+                  </button>
+                </Link>
               </th>
             </tr>
           ))}

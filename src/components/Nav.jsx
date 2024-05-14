@@ -62,6 +62,18 @@ const Nav = () => {
               ? "text-lg font-semibold px-5 py-3  text-emerald-500 border border-emerald-500"
               : "text-lg font-semibold "
           }
+          to="borrowedBooks"
+        >
+          Borrowed Books
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({isActive}) =>
+            isActive
+              ? "text-lg font-semibold px-5 py-3  text-emerald-500 border border-emerald-500"
+              : "text-lg font-semibold "
+          }
           to="allBooks"
         >
           All Books
