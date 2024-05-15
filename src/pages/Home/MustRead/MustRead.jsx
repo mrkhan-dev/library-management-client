@@ -1,7 +1,7 @@
 const MustRead = () => {
   return (
     <div className=" max-w-7xl mx-auto mt-20 mb-20">
-      <h1>Must Read</h1>
+      <h1 className="text-3xl font-Poppins mb-8">Must Read</h1>
       <div className="flex justify-between">
         <div className="">
           <img
