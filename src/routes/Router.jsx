@@ -10,6 +10,7 @@ import CategoryItem from "../pages/Home/CategoryItem";
 import Details from "../pages/Details/Details";
 import BorrowedBooks from "../pages/Borrowed/BorrowedBooks";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +24,19 @@ const router = createBrowserRouter([
       },
       {
         path: "addBooks",
-        element: <AddBook />,
+        element: (
+          <PrivetRoute>
+            <AddBook />
+          </PrivetRoute>
+        ),
       },
       {
         path: "allBooks",
-        element: <AllBooks />,
+        element: (
+          <PrivetRoute>
+            <AllBooks />
+          </PrivetRoute>
+        ),
         // loader: () => fetch("http://localhost:5000/allBooks"),
       },
       {
@@ -44,7 +53,11 @@ const router = createBrowserRouter([
       },
       {
         path: "borrowedBooks",
-        element: <BorrowedBooks />,
+        element: (
+          <PrivetRoute>
+            <BorrowedBooks />
+          </PrivetRoute>
+        ),
       },
       {
         path: "login",

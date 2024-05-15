@@ -11,7 +11,7 @@ const MustRead = () => {
           />
           <p>Customer Review</p>
         </div>
-        <div className="">
+        <div>
           <img
             className="h-28 shadow-lg"
             src="https://i.ibb.co/1mJk84K/ebook-24908-54029.jpg"
