@@ -1,13 +1,22 @@
 import {CiBoxList, CiGrid41} from "react-icons/ci";
 
-import {useLoaderData} from "react-router-dom";
+// import {useLoaderData} from "react-router-dom";
 import GridBooks from "./GridBooks";
 import ListBooks from "./ListBooks";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const AllBooks = () => {
-  const allBooks = useLoaderData();
+  // const allBooks = useLoaderData();
   const [view, setView] = useState(false);
+  const [allBooks, setAllBooks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/allBooks", {credentials: "include"})
+      .then((res) => res.json())
+      .then((data) => {
+        setAllBooks(data);
+      });
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto">

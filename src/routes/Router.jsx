@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "allBooks",
         element: <AllBooks />,
-        loader: () => fetch("http://localhost:5000/allBooks"),
+        // loader: () => fetch("http://localhost:5000/allBooks"),
       },
       {
         path: "/updateBook/:id",

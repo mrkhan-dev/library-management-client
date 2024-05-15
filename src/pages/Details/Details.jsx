@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Swal from "sweetalert2";
+import UseAuth from "../../hooks/UseAuth";
 
 const Details = () => {
   const [book, setBook] = useState({});
   const {id} = useParams();
+  const {user} = UseAuth();
 
   useEffect(() => {
     fetch(`http://localhost:5000/singleBook/${id}`)
@@ -15,31 +17,29 @@ const Details = () => {
   }, [id]);
 
   const quantity = book.quantity;
-  const quantityInt = parseInt(quantity);
+  let quantityInt = parseInt(quantity);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     quantityInt - 1;
-
     const form = e.target;
     const name = book.name;
     const category = book.category;
     const rating = parseInt(book.rating);
     const description = book.description;
-    const author = book.author;
     const image = book.image;
-    const email = book.email;
-    const returnDate = form.date.value;
+    const email = user.email;
+    const returnDate = form.returnDate.value;
+    const borrowedDate = form.borrowedDate.value;
 
     const formData = {
       name,
       category,
       rating,
-      author,
       description,
       image,
       email,
+      borrowedDate,
       returnDate,
     };
 
@@ -127,8 +127,18 @@ const Details = () => {
                 </label>
                 <input
                   type="date"
-                  name="date"
-                  placeholder="email"
+                  name="returnDate"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Borrowed date</span>
+                </label>
+                <input
+                  type="date"
+                  name="borrowedDate"
                   className="input input-bordered"
                   required
                 />

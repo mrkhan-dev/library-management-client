@@ -10,6 +10,7 @@ import {
 import {createContext, useEffect, useState} from "react";
 import auth from "../firebaseConfig/firebase.config";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -46,7 +47,8 @@ const AuthProvider = ({children}) => {
   };
 
   // sign out
-  const logOut = () => {
+  const logOut = async () => {
+    await axios.post("http://localhost:5000/logout");
     setUser(null);
     return signOut(auth);
   };
