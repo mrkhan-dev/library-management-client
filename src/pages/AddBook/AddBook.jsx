@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
+import axios from "axios";
 
 const AddBook = () => {
   const {user} = UseAuth();
@@ -29,16 +30,12 @@ const AddBook = () => {
       email,
     };
 
-    fetch("http://localhost:5000/addBooks", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    axios
+      .post("https://shelfmaster-bdserver.vercel.app/addBooks", formData, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.insertedId) {
           Swal.fire({
             title: "Good job!",
             text: "Book added successful",
@@ -46,6 +43,24 @@ const AddBook = () => {
           });
         }
       });
+
+    // fetch("https://shelfmaster-bdserver.vercel.app/addBooks", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         title: "Good job!",
+    //         text: "Book added successful",
+    //         icon: "success",
+    //       });
+    //     }
+    //   });
   };
 
   return (

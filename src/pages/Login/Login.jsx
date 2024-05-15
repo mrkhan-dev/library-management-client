@@ -2,11 +2,10 @@ import {useForm} from "react-hook-form";
 import toast from "react-hot-toast";
 import UseAuth from "../../hooks/UseAuth";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
-  const {login, user, googleLogin} = UseAuth();
-  console.log(user);
+  const {login, googleLogin} = UseAuth();
+  // console.log(user);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,17 +20,17 @@ const Login = () => {
     const {email, password} = data;
     login(email, password)
       .then((result) => {
-        const userEmail = {email};
-        axios
-          .post("http://localhost:5000/jwt", userEmail, {withCredentials: true})
-          .then((res) => {
-            console.log(res.data);
-          });
+        // const userEmail = {email};
+        // axios
+        //   .post("https://shelfmaster-bdserver.vercel.app/jwt", userEmail, {withCredentials: true})
+        //   .then((res) => {
+        //     console.log(res.data);
+        //   });
 
         toast.success("Sign Up successful");
 
         if (result.user) {
-          // navigate(location.state || "/");
+          navigate(location.state || "/");
         }
       })
       .catch(() => {
@@ -41,15 +40,15 @@ const Login = () => {
 
   const handleGoogleLogin = (googlePro) => {
     googlePro().then((result) => {
-      axios
-        .post(
-          "http://localhost:5000/jwt",
-          {email: result?.user?.email},
-          {withCredentials: true}
-        )
-        .then((res) => {
-          console.log(res.data);
-        });
+      // axios
+      //   .post(
+      //     "https://shelfmaster-bdserver.vercel.app/jwt",
+      //     {email: result?.user?.email},
+      //     {withCredentials: true}
+      //   )
+      //   .then((res) => {
+      //     console.log(res.data);
+      //   });
       if (result.user) {
         navigate(location.state || "/");
       }

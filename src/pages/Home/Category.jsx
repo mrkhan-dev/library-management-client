@@ -1,3 +1,4 @@
+import axios from "axios";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -5,11 +6,16 @@ const Category = () => {
   const [booksCategory, setBooksCategory] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allBooks")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setBooksCategory(data);
+    // fetch("https://shelfmaster-bdserver.vercel.app/allBooks")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setBooksCategory(data);
+    //   });
+    axios
+      .get("https://shelfmaster-bdserver.vercel.app/categoryBooks")
+      .then((result) => {
+        setBooksCategory(result.data);
       });
   }, []);
 

@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             <AllBooks />
           </PrivetRoute>
         ),
-        // loader: () => fetch("http://localhost:5000/allBooks"),
+        // loader: () => fetch("https://shelfmaster-bdserver.vercel.app/allBooks"),
       },
       {
         path: "/updateBook/:id",

@@ -4,6 +4,7 @@ import {CiBoxList, CiGrid41} from "react-icons/ci";
 import GridBooks from "./GridBooks";
 import ListBooks from "./ListBooks";
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 const AllBooks = () => {
   // const allBooks = useLoaderData();
@@ -11,10 +12,17 @@ const AllBooks = () => {
   const [allBooks, setAllBooks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allBooks", {credentials: "include"})
-      .then((res) => res.json())
-      .then((data) => {
-        setAllBooks(data);
+    // fetch("https://shelfmaster-bdserver.vercel.app/allBooks", {credentials: "include"})
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setAllBooks(data);
+    //   });
+    axios
+      .get("https://shelfmaster-bdserver.vercel.app/allBooks", {
+        withCredentials: true,
+      })
+      .then((result) => {
+        setAllBooks(result.data);
       });
   }, []);
 

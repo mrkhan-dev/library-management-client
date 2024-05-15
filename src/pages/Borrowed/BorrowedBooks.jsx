@@ -8,7 +8,9 @@ const BorrowedBooks = () => {
   const {user} = UseAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/borrowedBooks/${user?.email}`)
+    fetch(
+      `https://shelfmaster-bdserver.vercel.app/borrowedBooks/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setBorrowedBooks(data);
@@ -26,12 +28,12 @@ const BorrowedBooks = () => {
       confirmButtonText: "Yes, return it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteBooks/${id}`, {
+        fetch(`https://shelfmaster-bdserver.vercel.app/deleteBooks/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Returned!",

@@ -9,7 +9,7 @@ const Details = () => {
   const {user} = UseAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/singleBook/${id}`)
+    fetch(`https://shelfmaster-bdserver.vercel.app/singleBook/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBook(data);
@@ -43,7 +43,7 @@ const Details = () => {
       returnDate,
     };
 
-    fetch("http://localhost:5000/borrowedBooks", {
+    fetch("https://shelfmaster-bdserver.vercel.app/borrowedBooks", {
       method: "POST",
       headers: {
         "content-type": "application/json",

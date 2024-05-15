@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 const Register = () => {
   const [regError, setRegError] = useState();
 
-  const {createUer, updateUserProfile, user} = UseAuth();
-  console.log(user);
+  const {createUer, updateUserProfile} = UseAuth();
+  // console.log(user);
 
   const location = useLocation();
   const navigate = useNavigate();

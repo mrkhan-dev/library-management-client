@@ -4,12 +4,12 @@ import Swal from "sweetalert2";
 
 const Update = () => {
   const {id} = useParams();
-  console.log(id);
+  // console.log(id);
   const [books, setBooks] = useState({});
-  console.log(books);
+  // console.log(books);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/singleBook/${id}`)
+    fetch(`https://shelfmaster-bdserver.vercel.app/singleBook/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBooks(data);
@@ -35,7 +35,7 @@ const Update = () => {
       rating,
     };
 
-    fetch(`http://localhost:5000/updateBook/${id}`, {
+    fetch(`https://shelfmaster-bdserver.vercel.app/updateBook/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

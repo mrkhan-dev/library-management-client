@@ -4,10 +4,10 @@ import {Link, useParams} from "react-router-dom";
 const CategoryItem = () => {
   const {category} = useParams();
   const [cat, setCat] = useState([]);
-  console.log(cat);
+  // console.log(cat);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booksCategory/${category}`)
+    fetch(`https://shelfmaster-bdserver.vercel.app/booksCategory/${category}`)
       .then((res) => res.json())
       .then((data) => {
         setCat(data);

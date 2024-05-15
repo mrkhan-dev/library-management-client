@@ -1,14 +1,24 @@
+import axios from "axios";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+// import UseAuth from "../../hooks/UseAuth";
 
 const ListBooks = () => {
+  // const {user} = UseAuth();
   const [tableBook, setTableBook] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allBooks")
-      .then((res) => res.json())
-      .then((data) => {
-        setTableBook(data);
+    // fetch("https://shelfmaster-bdserver.vercel.app/allBooks", {credentials: "include"})
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setTableBook(data);
+    //   });
+    axios
+      .get("https://shelfmaster-bdserver.vercel.app/allBooks", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setTableBook(res.data);
       });
   }, []);
 

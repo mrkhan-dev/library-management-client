@@ -48,21 +48,46 @@ const AuthProvider = ({children}) => {
 
   // sign out
   const logOut = async () => {
-    await axios.post("http://localhost:5000/logout");
+    await axios.post("https://shelfmaster-bdserver.vercel.app/logout");
     setUser(null);
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedInUser = {email: userEmail};
+
       setLoading(false);
-      console.log(currentUser);
+      // console.log(currentUser);
       setUser(currentUser);
+
+      if (currentUser) {
+        axios
+          .post("https://shelfmaster-bdserver.vercel.app/jwt", loggedInUser, {
+            withCredentials: true,
+          })
+          .then(() => {
+            // console.log(result.data);
+          });
+      } else {
+        axios
+          .post(
+            "https://shelfmaster-bdserver.vercel.app/logout",
+            loggedInUser,
+            {
+              withCredentials: true,
+            }
+          )
+          .then(() => {
+            // console.log(res.data);
+          });
+      }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [user]);
 
   const values = {
     user,
