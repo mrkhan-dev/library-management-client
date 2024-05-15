@@ -49,7 +49,11 @@ const router = createBrowserRouter([
       },
       {
         path: "details/:id",
-        element: <Details />,
+        element: (
+          <PrivetRoute>
+            <Details />
+          </PrivetRoute>
+        ),
       },
       {
         path: "borrowedBooks",

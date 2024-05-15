@@ -33,6 +33,7 @@ const CategoryItem = () => {
             <div className="mt-4">
               <div className="flex justify-between px-4">
                 <h2 className="card-title">{book.name}</h2>
+                <p>{book.rating}</p>
                 <p>{book.category}</p>
               </div>
               <div className="flex justify-between px-4  gap-4 mt-4 items-center">
