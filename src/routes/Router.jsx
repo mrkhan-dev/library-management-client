@@ -9,11 +9,13 @@ import Update from "../pages/Update/Update";
 import CategoryItem from "../pages/Home/CategoryItem";
 import Details from "../pages/Details/Details";
 import BorrowedBooks from "../pages/Borrowed/BorrowedBooks";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
