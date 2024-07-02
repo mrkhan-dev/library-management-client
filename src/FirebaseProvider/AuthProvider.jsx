@@ -8,9 +8,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import {createContext, useEffect, useState} from "react";
-import auth from "../firebaseConfig/firebase.config";
+
 import PropTypes from "prop-types";
 import axios from "axios";
+import auth from "../firebaseConfig/firebase.config";
 
 export const AuthContext = createContext(null);
 
